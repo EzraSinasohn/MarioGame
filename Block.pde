@@ -1,4 +1,4 @@
-PImage groundBlock, pipeTop, pipe;
+PImage groundBlock, hardBlock, pipeTop, pipe;
 public class Block extends Object {
   public Block(float x, float y, float w, float h, PImage p) {
     myX = x;
