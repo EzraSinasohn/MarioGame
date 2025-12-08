@@ -10,12 +10,14 @@ public class Enemy extends Object {
     myHeight = h;
     startH = h;
     v = startV;
+    g = 0.8;
   }
   
   public void move() {
     super.move();
     myX += v;
     collision();
+    vy += g;
     myY += vy;
   }
   
@@ -40,6 +42,10 @@ public class Enemy extends Object {
       if((tiles.get(i).getL()-getR() <= 0 && tiles.get(i).getL()-getR() >= -(myWidth+tiles.get(i).getW())) && (getL()-tiles.get(i).getR() <= 0 && getL()-tiles.get(i).getR() >= -(myWidth+tiles.get(i).getW())) && (tiles.get(i).getT()-getB() <= 20 && tiles.get(i).getT()-getB() >= -60) && (getT()-tiles.get(i).getB() <= 20 && getT()-tiles.get(i).getB() >= -60)) {
         v *= -1;
       }
+      if(vy > 0 && !tiles.get(i).getFloor() && (tiles.get(i).getL()-getR() <= 0 && tiles.get(i).getL()-getR() >= -(myWidth+tiles.get(i).getW())) && (getL()-tiles.get(i).getR() <= 0 && getL()-tiles.get(i).getR() >= -(myWidth+tiles.get(i).getW()))) {
+          vy = 0;
+          myY = tiles.get(i).getT()-myHeight/2;
+        }
     }
   }
   
