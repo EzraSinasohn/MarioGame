@@ -2,6 +2,7 @@ PImage costume, smallMarioIdleR, smallMarioIdleL, smallMarioJumpR, smallMarioJum
 float costumeW = 30, costumeH = 40;
 boolean[] keys = new boolean[4];
 boolean canJump = false, right = true, jumping = false;
+int marioState = 0;
 class Mario extends Object {
   float startX, relX;
   public Mario(float x, float y, float w, float h) {
@@ -17,63 +18,65 @@ class Mario extends Object {
   }
   
   public void show() {
-    if(canJump) {
-      if(right && vx == 0) {
-        costume = smallMarioIdleR;
-        costumeW = 30;
-        costumeH = 40;
-      } else if(!right && vx == 0) {
-        costume = smallMarioIdleL;
-        costumeW = 30;
-        costumeH = 40;
-      } else if(keys[0] && vx > 0) {
-        if(Math.round(millis()/80)%3 == 0) {
-          costume = smallMarioRunR1;
-          costumeW = 37.5;
+    if(marioState == 0) {
+      if(canJump) {
+        if(right && vx == 0) {
+          costume = smallMarioIdleR;
+          costumeW = 30;
           costumeH = 40;
-        } else if(Math.round(millis()/80)%3 == 1) {
-          costume = smallMarioRunR2;
-          costumeW = 27.5;
+        } else if(!right && vx == 0) {
+          costume = smallMarioIdleL;
+          costumeW = 30;
           costumeH = 40;
+        } else if(keys[0] && vx > 0) {
+          if(Math.round(millis()/80)%3 == 0) {
+            costume = smallMarioRunR1;
+            costumeW = 37.5;
+            costumeH = 40;
+          } else if(Math.round(millis()/80)%3 == 1) {
+            costume = smallMarioRunR2;
+            costumeW = 27.5;
+            costumeH = 40;
+          } else {
+            costume = smallMarioRunR3;
+            costumeW = 32.5;
+            costumeH = 37.5;
+          }
+        } else if(keys[1] && vx < 0) {
+          if(Math.round(millis()/80)%3 == 0) {
+            costume = smallMarioRunL1;
+            costumeW = 37.5;
+            costumeH = 40;
+          } else if(Math.round(millis()/80)%3 == 1) {
+            costume = smallMarioRunL2;
+            costumeW = 27.5;
+            costumeH = 40;
+          } else {
+            costume = smallMarioRunL3;
+            costumeW = 32.5;
+            costumeH = 37.5;
+          }
         } else {
-          costume = smallMarioRunR3;
-          costumeW = 32.5;
-          costumeH = 37.5;
-        }
-      } else if(keys[1] && vx < 0) {
-        if(Math.round(millis()/80)%3 == 0) {
-          costume = smallMarioRunL1;
-          costumeW = 37.5;
-          costumeH = 40;
-        } else if(Math.round(millis()/80)%3 == 1) {
-          costume = smallMarioRunL2;
-          costumeW = 27.5;
-          costumeH = 40;
-        } else {
-          costume = smallMarioRunL3;
-          costumeW = 32.5;
-          costumeH = 37.5;
+          if(right) {
+            costume = smallMarioSlideR;
+            costumeW = 32.5;
+            costumeH = 40;
+          } else {
+            costume = smallMarioSlideL;
+            costumeW = 32.5;
+            costumeH = 40;
+          }
         }
       } else {
-        if(right) {
-          costume = smallMarioSlideR;
-          costumeW = 32.5;
+        if(right && jumping) {
+          costume = smallMarioJumpR;
+          costumeW = 40;
           costumeH = 40;
-        } else {
-          costume = smallMarioSlideL;
-          costumeW = 32.5;
+        } else if (!right && jumping) {
+          costume = smallMarioJumpL;
+          costumeW = 40;
           costumeH = 40;
         }
-      }
-    } else {
-      if(right && jumping) {
-        costume = smallMarioJumpR;
-        costumeW = 40;
-        costumeH = 40;
-      } else if (!right && jumping) {
-        costume = smallMarioJumpL;
-        costumeW = 40;
-        costumeH = 40;
       }
     }
     //rect(myX, myY, myWidth, myHeight);
@@ -104,6 +107,9 @@ class Mario extends Object {
           for(int e = 0; e < enemies.size(); e++) {
             enemies.get(e).setX(enemies.get(e).getX()+501-myX);
           }
+          for(int m = 0; m < items.size(); m++) {
+            items.get(m).setX(items.get(m).getX()+501-myX);
+          }
           myX = 500;
         } else if (vx < 0) {
           //keys[1] = false;
@@ -114,6 +120,9 @@ class Mario extends Object {
           }
           for(int e = 0; e < enemies.size(); e++) {
             enemies.get(e).setX(enemies.get(e).getX()+499-myX);
+          }
+          for(int m = 0; m < items.size(); m++) {
+            items.get(m).setX(items.get(m).getX()+499-myX);
           }
           myX = 500;
         }
@@ -133,6 +142,9 @@ class Mario extends Object {
       }
       for(int i = 0; i < enemies.size(); i++) {
         enemies.get(i).setX(enemies.get(i).getX()+500-myX);
+      }
+      for(int i = 0; i < items.size(); i++) {
+        items.get(i).setX(items.get(i).getX()+500-myX);
       }
       myX = 500;
     }
