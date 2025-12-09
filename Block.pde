@@ -3,13 +3,15 @@ public class Block extends Object {
   public boolean breakable = false;
   public boolean itemHeld = false;
   private float startY;
-  public Block(float x, float y, float w, float h, PImage p, int type) {
+  protected int itemInside;
+  public Block(float x, float y, float w, float h, PImage p, int type, int inside) {
     myX = x;
     myY = y;
     startY = y;
     myWidth = w;
     myHeight = h;
     img = p;
+    itemInside = inside;
     if(type == 1) {breakable = true;}
     if(type == 2) {itemHeld = true;}
   }
@@ -62,13 +64,14 @@ public class Block extends Object {
   }
   
   public void bump(int i) {
-    if(breakable) {
+    myY -= 20;
+    if(breakable && marioState != 0) {
       tiles.remove(i);
     }
     if(itemHeld) {
       img = hitBlock;
-      myY -= 20;
       itemHeld = false;
+      items.add(new Item(myX, myY, 40, 40, 2, tiles.get(i).itemInside));
     }
   }
 }
