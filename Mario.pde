@@ -1,5 +1,5 @@
 PImage costume, smallMarioIdleR, smallMarioIdleL, smallMarioJumpR, smallMarioJumpL, smallMarioRunR1, smallMarioRunL1, smallMarioRunR2, smallMarioRunL2, smallMarioRunR3, smallMarioRunL3, smallMarioSlideR, smallMarioSlideL;
-float costumeW = 40, costumeH = 40;
+float costumeW = 30, costumeH = 40;
 boolean[] keys = new boolean[4];
 boolean canJump = false, right = true, jumping = false;
 class Mario extends Object {
@@ -76,7 +76,8 @@ class Mario extends Object {
         costumeH = 40;
       }
     }
-    image(costume, myX, myY, costumeW, myHeight);
+    //rect(myX, myY, myWidth, myHeight);
+    image(costume, myX, myY, costumeW, costumeH);
   }
   
   public void collision() {
@@ -91,7 +92,8 @@ class Mario extends Object {
           if(!keys[2]) {jumping = false;}
         } else if(vy < 0 && !tiles.get(i).getRoof() && tiles.get(i).tOL() > -20 /*tiles.get(i).tOL() > -35*/) {
           vy = 0;
-          myY = tiles.get(i).getB()+myWidth/2;
+          myY = tiles.get(i).getB()+myHeight/2;
+          if(tiles.get(i).breakable || tiles.get(i).itemHeld) {tiles.get(i).bump(i);}
         } else if(vx > 0) {
           //keys[0] = false;
           //vx = 0;
