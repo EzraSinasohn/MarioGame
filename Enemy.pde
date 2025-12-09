@@ -15,10 +15,12 @@ public class Enemy extends Object {
   
   public void move() {
     super.move();
-    myX += v;
-    collision();
-    vy += g;
-    myY += vy;
+    if(myX > 0 && myX < width) {
+      myX += v;
+      collision();
+      vy += g;
+      myY += vy;
+    }
   }
   
   public void show() {
@@ -59,3 +61,4 @@ public class Enemy extends Object {
     }
   }
 }
+
