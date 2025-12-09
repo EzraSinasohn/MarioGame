@@ -42,6 +42,6 @@ public class Object {
   public float tOL() {return mario.getT()-getB();}
   public boolean r() {return rOL() < 0 && lOL() > -(myWidth+mario.getW());}
   public boolean l() {return lOL() < 0 && rOL() > -(myWidth+mario.getW());}
-  public boolean b() {return bOL() < 0 && tOL() > -(myWidth+mario.getW());}
-  public boolean t() {return tOL() < 0 && bOL() > -(myWidth+mario.getW());}
+  public boolean b() {return bOL() < 0 && tOL() > -(myHeight+mario.getH());}
+  public boolean t() {return tOL() < 0 && bOL() > -(myHeight+mario.getH());}
 }
