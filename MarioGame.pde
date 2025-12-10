@@ -63,20 +63,19 @@ void setup() {
   terrain(7440, height-300, 4, 40, hardBlock, 0, 0);
   terrain(7480, height-340, 3, 40, hardBlock, 0, 0);
   terrain(7520, height-380, 2, 40, hardBlock, 0, 0);
-  terrain(640, height-220, 1, 40, itemBlock1, 2, 0);
+  terrain(640, height-220, 1, 40, itemBlock1, 2, 1);
   terrain(800, height-220, 1, 40, brick, 1, 0);
   terrain(840, height-220, 1, 40, itemBlock1, 2, 2);
   terrain(880, height-220, 1, 40, brick, 1, 0);
-  terrain(920, height-220, 1, 40, itemBlock1, 2, 0);
+  terrain(920, height-220, 1, 40, itemBlock1, 2, 1);
   terrain(960, height-220, 1, 40, brick, 1, 0);
-  terrain(880, height-380, 1, 40, itemBlock1, 2, 0);
+  terrain(880, height-380, 1, 40, itemBlock1, 2, 1);
   terrain(3080, height-220, 1, 40, brick, 1, 0);
-  terrain(3120, height-220, 1, 40, itemBlock1, 2, 0);
+  terrain(3120, height-220, 1, 40, itemBlock1, 2, 1);
   terrain(3160, height-220, 1, 40, brick, 1, 0);
   terrain(3200, height-380, 8, 40, brick, 1, 0);
   terrain(3640, height-380, 3, 40, brick, 1, 0);
-  terrain(3760, height-380, 1, 40, itemBlock1, 2, 0);
-  terrain(3760, height-380, 1, 40, brick, 2, 0);
+  terrain(3760, height-380, 1, 40, itemBlock1, 2, 1);
   upPipe(1140, height-100, 2);
   upPipe(1540, height-100, 3);
   upPipe(1860, height-100, 4);
@@ -99,7 +98,7 @@ void draw() {
   }
   for(int i = 0; i < items.size(); i++) {
     items.get(i).move();
-    if(items.get(i).getX() > 0 && items.get(i).getX() < width) {items.get(i).show();}
+    //if(items.get(i).getX() > 0 && items.get(i).getX() < width) {items.get(i).show();}
   }
   for(int i = 0; i < tiles.size(); i++) {
     tiles.get(i).move();
