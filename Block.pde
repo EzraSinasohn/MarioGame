@@ -71,7 +71,7 @@ public class Block extends Object {
     if(itemHeld) {
       img = hitBlock;
       itemHeld = false;
-      items.add(new Item(myX, myY, 40, 40, 2, tiles.get(i).itemInside));
+      if(!(itemInside == 0)) {items.add(new Item(myX, myY, 40, 40, 2, tiles.get(i).itemInside, vx, items.size()));}
     }
   }
 }
