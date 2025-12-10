@@ -30,6 +30,7 @@ void setup() {
   hitBlock = loadImage("MarioHitBlock.png");
   pipeTop = loadImage("PipeTop.png");
   pipe = loadImage("Pipe.png");
+  mushroom = loadImage("Mushroom.png");
   frameRate(60);
   terrain(0, height-20, 69, 40, groundBlock, 0, 0);
   terrain(0, height-60, 69, 40, groundBlock, 0, 0);
@@ -76,6 +77,22 @@ void setup() {
   terrain(3200, height-380, 8, 40, brick, 1, 0);
   terrain(3640, height-380, 3, 40, brick, 1, 0);
   terrain(3760, height-380, 1, 40, itemBlock1, 2, 1);
+  terrain(3760, height-220, 1, 40, brick, 2, 1);
+  terrain(4000, height-220, 1, 40, brick, 1, 0);
+  terrain(4040, height-220, 1, 40, brick, 2, 3);
+  terrain(4240, height-220, 1, 40, itemBlock1, 2, 1);
+  terrain(4360, height-220, 1, 40, itemBlock1, 2, 1);
+  terrain(4360, height-380, 1, 40, itemBlock1, 2, 2);
+  terrain(4480, height-220, 1, 40, itemBlock1, 2, 1);
+  terrain(4720, height-220, 1, 40, brick, 1, 0);
+  terrain(4840, height-380, 3, 40, brick, 1, 0);
+  terrain(5120, height-380, 1, 40, brick, 1, 0);
+  terrain(5160, height-380, 2, 40, itemBlock1, 2, 1);
+  terrain(5160, height-220, 2, 40, brick, 1, 0);
+  terrain(5240, height-380, 1, 40, brick, 1, 0);
+  terrain(6720, height-220, 2, 40, brick, 1, 0);
+  terrain(6800, height-220, 1, 40, itemBlock1, 2, 1);
+  terrain(6840, height-220, 1, 40, brick, 1, 0);
   upPipe(1140, height-100, 2);
   upPipe(1540, height-100, 3);
   upPipe(1860, height-100, 4);
@@ -86,6 +103,14 @@ void setup() {
   enemies.add(new Enemy(1640, 700, 40, 40, -2));
   enemies.add(new Enemy(2080, 700, 40, 40, -2));
   enemies.add(new Enemy(2140, 700, 40, 40, -2));
+  enemies.add(new Enemy(3880, 700, 40, 40, -2));
+  enemies.add(new Enemy(3940, 700, 40, 40, -2));
+  enemies.add(new Enemy(4560, 700, 40, 40, -2));
+  enemies.add(new Enemy(4620, 700, 40, 40, -2));
+  enemies.add(new Enemy(4960, 700, 40, 40, -2));
+  enemies.add(new Enemy(5020, 700, 40, 40, -2));
+  enemies.add(new Enemy(5120, 700, 40, 40, -2));
+  enemies.add(new Enemy(5180, 700, 40, 40, -2));
   enemies.add(new Enemy(6960, 700, 40, 40, -2));
   enemies.add(new Enemy(7020, 700, 40, 40, -2));
 }
