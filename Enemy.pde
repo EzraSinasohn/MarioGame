@@ -18,7 +18,7 @@ public class Enemy extends Object {
     if(myX > 0 && myX < width) {
       myX += v;
       collision();
-      vy += g;
+      if(vy < 20) {vy += g;}
       myY += vy;
     }
   }
@@ -44,7 +44,7 @@ public class Enemy extends Object {
       if((tiles.get(i).getL()-getR() <= 0 && tiles.get(i).getL()-getR() >= -(myWidth+tiles.get(i).getW())) && (getL()-tiles.get(i).getR() <= 0 && getL()-tiles.get(i).getR() >= -(myWidth+tiles.get(i).getW())) && (tiles.get(i).getT()-getB() <= 20 && tiles.get(i).getT()-getB() >= -60) && (getT()-tiles.get(i).getB() <= 20 && getT()-tiles.get(i).getB() >= -60)) {
         v *= -1;
       }
-      if(vy > 0 && !tiles.get(i).getFloor() && (tiles.get(i).getL()-getR() <= 0 && tiles.get(i).getL()-getR() >= -(myWidth+tiles.get(i).getW())) && (getL()-tiles.get(i).getR() <= 0 && getL()-tiles.get(i).getR() >= -(myWidth+tiles.get(i).getW()))) {
+      if(vy > 0 && (tiles.get(i).getL()-getR() <= 0 && tiles.get(i).getL()-getR() >= -(myWidth+tiles.get(i).getW())) && (getL()-tiles.get(i).getR() <= 0 && getL()-tiles.get(i).getR() >= -(myWidth+tiles.get(i).getW())) && (tiles.get(i).getT()-getB() <= 0 && tiles.get(i).getT()-getB() >= -80) && (getT()-tiles.get(i).getB() <= 0 && getT()-tiles.get(i).getB() >= -80)) {
           vy = 0;
           myY = tiles.get(i).getT()-myHeight/2;
         }
