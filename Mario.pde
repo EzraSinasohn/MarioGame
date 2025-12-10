@@ -136,6 +136,7 @@ class Mario extends Object {
     myY += vy;
     collision();
     enemyStomp();
+    itemGet();
     if(myX != 500) {
       for(int i = 0; i < tiles.size(); i++) {
         tiles.get(i).setX(tiles.get(i).getX()+500-myX);
@@ -159,6 +160,23 @@ class Mario extends Object {
           enemies.get(i).die(i);
           //myY = enemies.get(i).getT()-myHeight/2;
         } 
+      }
+    }
+  }
+  
+  public void itemGet() {
+    for(int i = 0; i < items.size(); i++) {
+      if(items.get(i).r() && items.get(i).l() && items.get(i).b() && items.get(i).t()) {
+        if(items.get(i).myItem == 1) { //coin
+        
+        } else if(items.get(i).myItem == 2) { //mushroom
+          
+        } else if(items.get(i).myItem == 3) { // fire flower
+          
+        } else if(items.get(i).myItem == 4) { // star
+          
+        }
+        items.remove(i);
       }
     }
   }
