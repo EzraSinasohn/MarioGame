@@ -166,7 +166,7 @@ class Mario extends Object {
   
   public void itemGet() {
     for(int i = 0; i < items.size(); i++) {
-      if(items.get(i).r() && items.get(i).l() && items.get(i).b() && items.get(i).t()) {
+      if(items.get(i).collected || (items.get(i).r() && items.get(i).l() && items.get(i).b() && items.get(i).t())) {
         if(items.get(i).myItem == 1) { //coin
         
         } else if(items.get(i).myItem == 2) { //mushroom
