@@ -7,8 +7,13 @@ public class Object {
   
   public void move() {
     if((keys[0] || keys[1])) {
-      if(keys[0]) {accelerate(1, 10);}
-      if(keys[1]) {accelerate(-1, -10);}
+      if(keys[4]) {
+        if(keys[0]) {accelerate(0.2, 6);}
+        if(keys[1]) {accelerate(-0.2, -6);}
+      } else {
+        if(keys[0]) {accelerate(0.1, 4);}
+        if(keys[1]) {accelerate(-0.1, -4);}
+      }
     } else {
       vx *= 0.9;
       if(Math.abs(vx) < 0.1) {vx = 0;}
