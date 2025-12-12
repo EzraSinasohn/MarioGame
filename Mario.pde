@@ -1,6 +1,6 @@
 PImage costume, smallMarioIdleR, smallMarioIdleL, smallMarioJumpR, smallMarioJumpL, smallMarioRunR1, smallMarioRunL1, smallMarioRunR2, smallMarioRunL2, smallMarioRunR3, smallMarioRunL3, smallMarioSlideR, smallMarioSlideL;
 float costumeW = 30, costumeH = 40;
-boolean[] keys = new boolean[4];
+boolean[] keys = new boolean[5];
 boolean canJump = false, right = true, jumping = false;
 int marioState = 0;
 class Mario extends Object {
@@ -14,7 +14,7 @@ class Mario extends Object {
     myHeight = h;
     vx = 0;
     vy = 0;
-    g = 1.2;
+    g = 0.8;
   }
   
   public void show() {
@@ -29,32 +29,64 @@ class Mario extends Object {
           costumeW = 30;
           costumeH = 40;
         } else if(keys[0] && vx > 0) {
-          if(Math.round(millis()/80)%3 == 0) {
-            costume = smallMarioRunR1;
-            costumeW = 37.5;
-            costumeH = 40;
-          } else if(Math.round(millis()/80)%3 == 1) {
-            costume = smallMarioRunR2;
-            costumeW = 27.5;
-            costumeH = 40;
+          if(keys[4]) {
+            if(Math.round(millis()/80)%3 == 0) {
+              costume = smallMarioRunR1;
+              costumeW = 37.5;
+              costumeH = 40;
+            } else if(Math.round(millis()/80)%3 == 1) {
+              costume = smallMarioRunR2;
+              costumeW = 27.5;
+              costumeH = 40;
+            } else {
+              costume = smallMarioRunR3;
+              costumeW = 32.5;
+              costumeH = 37.5;
+            }
           } else {
-            costume = smallMarioRunR3;
-            costumeW = 32.5;
-            costumeH = 37.5;
+            if(Math.round(millis()/160)%3 == 0) {
+              costume = smallMarioRunR1;
+              costumeW = 37.5;
+              costumeH = 40;
+            } else if(Math.round(millis()/160)%3 == 1) {
+              costume = smallMarioRunR2;
+              costumeW = 27.5;
+              costumeH = 40;
+            } else {
+              costume = smallMarioRunR3;
+              costumeW = 32.5;
+              costumeH = 37.5;
+            }
           }
         } else if(keys[1] && vx < 0) {
-          if(Math.round(millis()/80)%3 == 0) {
-            costume = smallMarioRunL1;
-            costumeW = 37.5;
-            costumeH = 40;
-          } else if(Math.round(millis()/80)%3 == 1) {
-            costume = smallMarioRunL2;
-            costumeW = 27.5;
-            costumeH = 40;
+          if(keys[4]) {
+            if(Math.round(millis()/80)%3 == 0) {
+              costume = smallMarioRunL1;
+              costumeW = 37.5;
+              costumeH = 40;
+            } else if(Math.round(millis()/80)%3 == 1) {
+              costume = smallMarioRunL2;
+              costumeW = 27.5;
+              costumeH = 40;
+            } else {
+              costume = smallMarioRunL3;
+              costumeW = 32.5;
+              costumeH = 37.5;
+            }
           } else {
-            costume = smallMarioRunL3;
-            costumeW = 32.5;
-            costumeH = 37.5;
+            if(Math.round(millis()/160)%3 == 0) {
+              costume = smallMarioRunL1;
+              costumeW = 37.5;
+              costumeH = 40;
+            } else if(Math.round(millis()/160)%3 == 1) {
+              costume = smallMarioRunL2;
+              costumeW = 27.5;
+              costumeH = 40;
+            } else {
+              costume = smallMarioRunL3;
+              costumeW = 32.5;
+              costumeH = 37.5;
+            }
           }
         } else {
           if(right) {
@@ -131,8 +163,8 @@ class Mario extends Object {
   }
   
   public void move() {
-    if(keys[2] && canJump) {vy = -20;}
-    if(vy < 19) {vy += g;} else {vy = 19;}
+    if(keys[2] && canJump) {vy = -16;}
+    if(vy < 10) {vy += g;} else {vy = 10;}
     myY += vy;
     collision();
     enemyStomp();
@@ -197,6 +229,8 @@ public void keyPressed() {
     jumping = true;
   } if(keyCode == DOWN) {
     keys[3] = true;
+  } if(key == 'x') {
+    keys[4] = true;
   } if(key == 'r') {
     mario.setY(500);
   }
@@ -211,5 +245,7 @@ public void keyReleased() {
     keys[2] = false;
   } if(keyCode == DOWN) {
     keys[3] = false;
+  } if(key == 'x') {
+    keys[4] = false;
   }
 }
