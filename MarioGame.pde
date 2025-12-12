@@ -119,7 +119,7 @@ void draw() {
   background(100, 100, 255);
   for(int i = 0; i < enemies.size(); i++) {
     enemies.get(i).move();
-    if(enemies.get(i).getX() > 0 && enemies.get(i).getX() < width) {enemies.get(i).show();}
+    /*if(enemies.get(i).getX() > 0 && enemies.get(i).getX() < width) {*/enemies.get(i).show();//}
   }
   for(int i = 0; i < items.size(); i++) {
     items.get(i).move();
@@ -134,3 +134,4 @@ void draw() {
   text((int) (mario.relX), 50, 50);
   text(mario.getY(), 250, 50);
 }
+
