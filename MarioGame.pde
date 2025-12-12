@@ -99,27 +99,27 @@ void setup() {
   upPipe(2300, height-100, 4);
   upPipe(6540, height-100, 2);
   upPipe(7180, height-100, 2);
-  enemies.add(new Enemy(900, 700, 40, 40, -2));
-  enemies.add(new Enemy(1640, 700, 40, 40, -2));
-  enemies.add(new Enemy(2080, 700, 40, 40, -2));
-  enemies.add(new Enemy(2140, 700, 40, 40, -2));
-  enemies.add(new Enemy(3880, 700, 40, 40, -2));
-  enemies.add(new Enemy(3940, 700, 40, 40, -2));
-  enemies.add(new Enemy(4560, 700, 40, 40, -2));
-  enemies.add(new Enemy(4620, 700, 40, 40, -2));
-  enemies.add(new Enemy(4960, 700, 40, 40, -2));
-  enemies.add(new Enemy(5020, 700, 40, 40, -2));
-  enemies.add(new Enemy(5120, 700, 40, 40, -2));
-  enemies.add(new Enemy(5180, 700, 40, 40, -2));
-  enemies.add(new Enemy(6960, 700, 40, 40, -2));
-  enemies.add(new Enemy(7020, 700, 40, 40, -2));
+  enemies.add(new Enemy(900, 700, 40, 40, -1.5, 0));
+  enemies.add(new Enemy(1640, 700, 40, 40, -1.5, 1));
+  enemies.add(new Enemy(2080, 700, 40, 40, -1.5, 2));
+  enemies.add(new Enemy(2140, 700, 40, 40, -1.5, 3));
+  enemies.add(new Enemy(3880, 700, 40, 40, -1.5, 4));
+  enemies.add(new Enemy(3940, 700, 40, 40, -1.5, 5));
+  enemies.add(new Enemy(4560, 700, 40, 40, -1.5, 6));
+  enemies.add(new Enemy(4620, 700, 40, 40, -1.5, 7));
+  enemies.add(new Enemy(4960, 700, 40, 40, -1.5, 8));
+  enemies.add(new Enemy(5020, 700, 40, 40, -1.5, 9));
+  enemies.add(new Enemy(5120, 700, 40, 40, -1.5, 10));
+  enemies.add(new Enemy(5180, 700, 40, 40, -1.5, 11));
+  enemies.add(new Enemy(6960, 700, 40, 40, -1.5, 12));
+  enemies.add(new Enemy(7020, 700, 40, 40, -1.5, 13));
 }
 
 void draw() {
   background(100, 100, 255);
   for(int i = 0; i < enemies.size(); i++) {
     enemies.get(i).move();
-    /*if(enemies.get(i).getX() > 0 && enemies.get(i).getX() < width) {*/enemies.get(i).show();//}
+    if(enemies.get(i).getX() > 0 && enemies.get(i).getX() < width) {enemies.get(i).show();}
   }
   for(int i = 0; i < items.size(); i++) {
     items.get(i).move();
@@ -134,4 +134,3 @@ void draw() {
   text((int) (mario.relX), 50, 50);
   text(mario.getY(), 250, 50);
 }
-
