@@ -31,6 +31,7 @@ void setup() {
   pipeTop = loadImage("PipeTop.png");
   pipe = loadImage("Pipe.png");
   mushroom = loadImage("Mushroom.png");
+  fireFlower = loadImage("FireFlower.png");
   frameRate(60);
   terrain(0, height-20, 69, 40, groundBlock, 0, 0);
   terrain(0, height-60, 69, 40, groundBlock, 0, 0);
@@ -79,7 +80,7 @@ void setup() {
   terrain(3760, height-380, 1, 40, itemBlock1, 2, 1);
   terrain(3760, height-220, 1, 40, brick, 2, 1);
   terrain(4000, height-220, 1, 40, brick, 1, 0);
-  terrain(4040, height-220, 1, 40, brick, 2, 3);
+  terrain(4040, height-220, 1, 40, brick, 2, 4);
   terrain(4240, height-220, 1, 40, itemBlock1, 2, 1);
   terrain(4360, height-220, 1, 40, itemBlock1, 2, 1);
   terrain(4360, height-380, 1, 40, itemBlock1, 2, 2);
