@@ -8,11 +8,11 @@ public class Object {
   public void move() {
     if((keys[0] || keys[1])) {
       if(keys[4]) {
-        if(keys[0]) {accelerate(0.2, 6);}
-        if(keys[1]) {accelerate(-0.2, -6);}
+        if(keys[0]) {accelerate(0.4, 8);}
+        if(keys[1]) {accelerate(-0.4, -8);}
       } else {
-        if(keys[0]) {accelerate(0.1, 4);}
-        if(keys[1]) {accelerate(-0.1, -4);}
+        if(keys[0]) {accelerate(0.4, 6);}
+        if(keys[1]) {accelerate(-0.4, -6);}
       }
     } else {
       vx *= 0.9;
