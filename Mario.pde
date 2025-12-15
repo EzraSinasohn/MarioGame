@@ -14,7 +14,7 @@ class Mario extends Object {
     myHeight = h;
     vx = 0;
     vy = 0;
-    g = 0.8;
+    g = 1;
   }
   
   public void show() {
@@ -110,6 +110,98 @@ class Mario extends Object {
           costumeH = 40;
         }
       }
+    } else {
+      if(canJump) {
+        if(right && vx == 0) {
+          costume = smallMarioIdleR;
+          costumeW = 30;
+          costumeH = 40*2;
+        } else if(!right && vx == 0) {
+          costume = smallMarioIdleL;
+          costumeW = 30;
+          costumeH = 40*2;
+        } else if(keys[0] && vx > 0) {
+          if(keys[4]) {
+            if(Math.round(millis()/80)%3 == 0) {
+              costume = smallMarioRunR1;
+              costumeW = 37.5;
+              costumeH = 40*2;
+            } else if(Math.round(millis()/80)%3 == 1) {
+              costume = smallMarioRunR2;
+              costumeW = 27.5;
+              costumeH = 40*2;
+            } else {
+              costume = smallMarioRunR3;
+              costumeW = 32.5;
+              costumeH = 37.5*2;
+            }
+          } else {
+            if(Math.round(millis()/160)%3 == 0) {
+              costume = smallMarioRunR1;
+              costumeW = 37.5;
+              costumeH = 40*2;
+            } else if(Math.round(millis()/160)%3 == 1) {
+              costume = smallMarioRunR2;
+              costumeW = 27.5;
+              costumeH = 40*2;
+            } else {
+              costume = smallMarioRunR3;
+              costumeW = 32.5;
+              costumeH = 37.5*2;
+            }
+          }
+        } else if(keys[1] && vx < 0) {
+          if(keys[4]) {
+            if(Math.round(millis()/80)%3 == 0) {
+              costume = smallMarioRunL1;
+              costumeW = 37.5;
+              costumeH = 40*2;
+            } else if(Math.round(millis()/80)%3 == 1) {
+              costume = smallMarioRunL2;
+              costumeW = 27.5;
+              costumeH = 40*2;
+            } else {
+              costume = smallMarioRunL3;
+              costumeW = 32.5;
+              costumeH = 37.5*2;
+            }
+          } else {
+            if(Math.round(millis()/160)%3 == 0) {
+              costume = smallMarioRunL1;
+              costumeW = 37.5;
+              costumeH = 40*2;
+            } else if(Math.round(millis()/160)%3 == 1) {
+              costume = smallMarioRunL2;
+              costumeW = 27.5;
+              costumeH = 40*2;
+            } else {
+              costume = smallMarioRunL3;
+              costumeW = 32.5;
+              costumeH = 37.5*2;
+            }
+          }
+        } else {
+          if(right) {
+            costume = smallMarioSlideR;
+            costumeW = 32.5;
+            costumeH = 40*2;
+          } else {
+            costume = smallMarioSlideL;
+            costumeW = 32.5;
+            costumeH = 40*2;
+          }
+        }
+      } else {
+        if(right && jumping) {
+          costume = smallMarioJumpR;
+          costumeW = 40;
+          costumeH = 40*2;
+        } else if (!right && jumping) {
+          costume = smallMarioJumpL;
+          costumeW = 40;
+          costumeH = 40*2;
+        }
+      }
     }
     //rect(myX, myY, myWidth, myHeight);
     image(costume, myX, myY, costumeW, costumeH);
@@ -163,8 +255,8 @@ class Mario extends Object {
   }
   
   public void move() {
-    if(keys[2] && canJump) {vy = -16;}
-    if(vy < 10) {vy += g;} else {vy = 10;}
+    if(keys[2] && canJump) {vy = -19;}
+    if(vy < 14) {vy += g;} else {vy = 14;}
     myY += vy;
     collision();
     enemyStomp();
@@ -200,11 +292,17 @@ class Mario extends Object {
     for(int i = 0; i < items.size(); i++) {
       if(items.get(i).collected || (items.get(i).r() && items.get(i).l() && items.get(i).b() && items.get(i).t())) {
         if(items.get(i).myItem == 1) { //coin
-        
-        } else if(items.get(i).myItem == 2) { //mushroom
           
+        } else if(items.get(i).myItem == 2 && marioState == 0) { //mushroom
+          myHeight = 80;
+          myY -= 20;
+          marioState = 1;
         } else if(items.get(i).myItem == 3) { // fire flower
-          
+          if(marioState == 0) {
+            myHeight = 80;
+            myY -= 20;
+          }
+          marioState = 2;
         } else if(items.get(i).myItem == 4) { // star
           
         }
