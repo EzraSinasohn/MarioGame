@@ -71,7 +71,17 @@ public class Block extends Object {
     if(itemHeld) {
       img = hitBlock;
       itemHeld = false;
-      if(!(itemInside == 0)) {items.add(new Item(myX, myY, 40, 40, 2, tiles.get(i).itemInside, vx));}
+      if(!(itemInside == 0)) {
+        if(!(tiles.get(i).itemInside == 2)) {
+          items.add(new Item(myX, myY, 40, 40, 2, tiles.get(i).itemInside, vx));
+        } else {
+          if(marioState == 0) {
+            items.add(new Item(myX, myY, 40, 40, 2, tiles.get(i).itemInside, vx));
+          } else {
+            items.add(new Item(myX, myY, 40, 40, 0, tiles.get(i).itemInside+1, vx));
+          }
+        }
+      }
     }
   }
 }
