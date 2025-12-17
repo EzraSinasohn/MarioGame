@@ -2,7 +2,8 @@ PImage goomba1, goomba2, goombaStomped;
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 public class Enemy extends Object {
   double v, startH;
-  int deathTime = 1000000000, deathID = -1, myID;
+  int deathTime = 1000000000, myID;
+  boolean dying = false, dead = false;
   public Enemy(float x, float y, float w, float h, double startV, int id) {
     myX = x;
     myY = y;
@@ -16,33 +17,31 @@ public class Enemy extends Object {
   
   public void move() {
     super.move();
-    if(myX > 0 && myX < width && deathID <= -1) {
+    if(myX > 0 && myX < width && !dying) {
       myX += v;
       collision();
       if(vy < 20) {vy += g;}
       myY += vy;
     }
-    if(myY > height) {die(myID);}
+    if(myY > height) {die();}
   }
   
   public void show() {
-    if(deathID > -1) {
+    if(millis() > deathTime+200) {dead = true;}
+    if(dying) {
       image(goombaStomped, myX, myY, myWidth, myHeight);
     } else if((int) (millis()/250) % 2 == 1) {
       image(goomba1, myX, myY, myWidth, myHeight);
     } else {
       image(goomba2, myX, myY, myWidth, myHeight);
     }
-    if(millis() > deathTime+200) {
-      for(int i = enemies.size()-1; i > deathID; i--) {enemies.get(i).myID -= 1;}
-      enemies.remove(deathID);
-      for(int i = 0; i < enemies.size(); i++) {
-        enemies.get(i).deathID -= 1;
+    for(int i = 0; i < enemies.size(); i++) {
+      if(enemies.get(i).dead) {
+        for(int n = enemies.size()-1; n > i; n--) {enemies.get(n).myID -= 1;}
+        enemies.remove(i);
+        break;
       }
     }
-    fill(255, 0, 0);
-    textSize(30);
-    text(myID, myX, myY-30);
   }
   
   public void collision() {
@@ -64,13 +63,13 @@ public class Enemy extends Object {
     }
   }
   
-  public void die(int i) {
+  public void die() {
     if(myHeight == startH) {
       deathTime = millis();
-      deathID = i;
       v = 0;
       myHeight /= 2;
       myY += myHeight/2;
+      dying = true;
     }
   }
 }
