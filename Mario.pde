@@ -1,7 +1,7 @@
 PImage costume, smallMarioIdleR, smallMarioIdleL, smallMarioJumpR, smallMarioJumpL, smallMarioRunR1, smallMarioRunL1, smallMarioRunR2, smallMarioRunL2, smallMarioRunR3, smallMarioRunL3, smallMarioSlideR, smallMarioSlideL, marioDying, bigMarioIdleR, bigMarioIdleL, bigMarioJumpR, bigMarioJumpL, bigMarioRunR1, bigMarioRunL1, bigMarioRunR2, bigMarioRunL2, bigMarioRunR3, bigMarioRunL3, bigMarioSlideR, bigMarioSlideL, bigMarioCrouchR, bigMarioCrouchL, fireMarioIdleR, fireMarioIdleL, fireMarioJumpR, fireMarioJumpL, fireMarioRunR1, fireMarioRunL1, fireMarioRunR2, fireMarioRunL2, fireMarioRunR3, fireMarioRunL3, fireMarioSlideR, fireMarioSlideL, fireMarioCrouchR, fireMarioCrouchL, fireMarioThrowR, fireMarioThrowL;
 float costumeW = 30, costumeH = 40;
 boolean[] keys = new boolean[5];
-boolean canJump = false, right = true, jumping = false, fireballing = false, marioDead = false;
+boolean canJump = false, right = true, jumping = false, crouching = false, bonk = false, fireballing = false, marioDead = false;
 int marioState = 0, fireballTimer = 0, invincibility = -3000;
 class Mario extends Object {
   float startX, relX;
@@ -115,134 +115,42 @@ class Mario extends Object {
         }
       }
     } else if(marioState == 1) {
-      if(canJump) {
-        if(right && vx == 0) {
-          costume = bigMarioIdleR;
-          costumeW = 40;
-          costumeH = 80;
-        } else if(!right && vx == 0) {
-          costume = bigMarioIdleL;
-          costumeW = 40;
-          costumeH = 80;
-        } else if(keys[0] && vx > 0) {
-          if(keys[4]) {
-            if(Math.round(millis()/80)%3 == 0) {
-              costume = bigMarioRunR1;
-              costumeW = 40;
-              costumeH = 80;
-            } else if(Math.round(millis()/80)%3 == 1) {
-              costume = bigMarioRunR2;
-              costumeW = 40;
-              costumeH = 75;
-            } else {
-              costume = bigMarioRunR3;
-              costumeW = 35;
-              costumeH = 77.5;
-            }
-          } else {
-            if(Math.round(millis()/160)%3 == 0) {
-              costume = bigMarioRunR1;
-              costumeW = 40;
-              costumeH = 80;
-            } else if(Math.round(millis()/160)%3 == 1) {
-              costume = bigMarioRunR2;
-              costumeW = 40;
-              costumeH = 75;
-            } else {
-              costume = bigMarioRunR3;
-              costumeW = 35;
-              costumeH = 77.5;
-            }
-          }
-        } else if(keys[1] && vx < 0) {
-          if(keys[4]) {
-            if(Math.round(millis()/80)%3 == 0) {
-              costume = bigMarioRunL1;
-              costumeW = 40;
-              costumeH = 80;
-            } else if(Math.round(millis()/80)%3 == 1) {
-              costume = bigMarioRunL2;
-              costumeW = 40;
-              costumeH = 75;
-            } else {
-              costume = bigMarioRunL3;
-              costumeW = 35;
-              costumeH = 77.5;
-            }
-          } else {
-            if(Math.round(millis()/160)%3 == 0) {
-              costume = bigMarioRunL1;
-              costumeW = 40;
-              costumeH = 80;
-            } else if(Math.round(millis()/160)%3 == 1) {
-              costume = bigMarioRunL2;
-              costumeW = 40;
-              costumeH = 75;
-            } else {
-              costume = bigMarioRunL3;
-              costumeW = 35;
-              costumeH = 77.5;
-            }
-          }
-        } else {
-          if(right) {
-            costume = bigMarioSlideR;
-            costumeW = 40;
-            costumeH = 80;
-          } else {
-            costume = bigMarioSlideL;
-            costumeW = 40;
-            costumeH = 80;
-          }
-        }
-      } else {
-        if(right && jumping) {
-          costume = bigMarioJumpR;
-          costumeW = 40;
-          costumeH = 80;
-        } else if (!right && jumping) {
-          costume = bigMarioJumpL;
-          costumeW = 40;
-          costumeH = 80;
-        }
-      }
-    } else if(marioState == 2) {
-      if(millis()-fireballTimer > 200) {
+      if(!crouching) {
         if(canJump) {
           if(right && vx == 0) {
-            costume = fireMarioIdleR;
+            costume = bigMarioIdleR;
             costumeW = 40;
             costumeH = 80;
           } else if(!right && vx == 0) {
-            costume = fireMarioIdleL;
+            costume = bigMarioIdleL;
             costumeW = 40;
             costumeH = 80;
           } else if(keys[0] && vx > 0) {
             if(keys[4]) {
               if(Math.round(millis()/80)%3 == 0) {
-                costume = fireMarioRunR1;
+                costume = bigMarioRunR1;
                 costumeW = 40;
                 costumeH = 80;
               } else if(Math.round(millis()/80)%3 == 1) {
-                costume = fireMarioRunR2;
+                costume = bigMarioRunR2;
                 costumeW = 40;
                 costumeH = 75;
               } else {
-                costume = fireMarioRunR3;
+                costume = bigMarioRunR3;
                 costumeW = 35;
                 costumeH = 77.5;
               }
             } else {
               if(Math.round(millis()/160)%3 == 0) {
-                costume = fireMarioRunR1;
+                costume = bigMarioRunR1;
                 costumeW = 40;
                 costumeH = 80;
               } else if(Math.round(millis()/160)%3 == 1) {
-                costume = fireMarioRunR2;
+                costume = bigMarioRunR2;
                 costumeW = 40;
                 costumeH = 75;
               } else {
-                costume = fireMarioRunR3;
+                costume = bigMarioRunR3;
                 costumeW = 35;
                 costumeH = 77.5;
               }
@@ -250,64 +158,180 @@ class Mario extends Object {
           } else if(keys[1] && vx < 0) {
             if(keys[4]) {
               if(Math.round(millis()/80)%3 == 0) {
-                costume = fireMarioRunL1;
+                costume = bigMarioRunL1;
                 costumeW = 40;
                 costumeH = 80;
               } else if(Math.round(millis()/80)%3 == 1) {
-                costume = fireMarioRunL2;
+                costume = bigMarioRunL2;
                 costumeW = 40;
                 costumeH = 75;
               } else {
-                costume = fireMarioRunL3;
+                costume = bigMarioRunL3;
                 costumeW = 35;
                 costumeH = 77.5;
               }
             } else {
               if(Math.round(millis()/160)%3 == 0) {
-                costume = fireMarioRunL1;
+                costume = bigMarioRunL1;
                 costumeW = 40;
                 costumeH = 80;
               } else if(Math.round(millis()/160)%3 == 1) {
-                costume = fireMarioRunL2;
+                costume = bigMarioRunL2;
                 costumeW = 40;
                 costumeH = 75;
               } else {
-                costume = fireMarioRunL3;
+                costume = bigMarioRunL3;
                 costumeW = 35;
                 costumeH = 77.5;
               }
             }
           } else {
             if(right) {
-              costume = fireMarioSlideR;
+              costume = bigMarioSlideR;
               costumeW = 40;
               costumeH = 80;
             } else {
-              costume = fireMarioSlideL;
+              costume = bigMarioSlideL;
               costumeW = 40;
               costumeH = 80;
             }
           }
         } else {
           if(right && jumping) {
-            costume = fireMarioJumpR;
+            costume = bigMarioJumpR;
             costumeW = 40;
             costumeH = 80;
           } else if (!right && jumping) {
-            costume = fireMarioJumpL;
+            costume = bigMarioJumpL;
             costumeW = 40;
             costumeH = 80;
           }
         }
       } else {
         if(right) {
-          costume = fireMarioThrowR;
+          costume = bigMarioCrouchR;
           costumeW = 40;
-          costumeH = 75;
+          costumeH = 55;
         } else {
-          costume = fireMarioThrowL;
+          costume = bigMarioCrouchL;
           costumeW = 40;
-          costumeH = 75;
+          costumeH = 55;
+        }
+      }
+    } else if(marioState == 2) {
+      if(!crouching) {
+        if(millis()-fireballTimer > 200) {
+          if(canJump) {
+            if(right && vx == 0) {
+              costume = fireMarioIdleR;
+              costumeW = 40;
+              costumeH = 80;
+            } else if(!right && vx == 0) {
+              costume = fireMarioIdleL;
+              costumeW = 40;
+              costumeH = 80;
+            } else if(keys[0] && vx > 0) {
+              if(keys[4]) {
+                if(Math.round(millis()/80)%3 == 0) {
+                  costume = fireMarioRunR1;
+                  costumeW = 40;
+                  costumeH = 80;
+                } else if(Math.round(millis()/80)%3 == 1) {
+                  costume = fireMarioRunR2;
+                  costumeW = 40;
+                  costumeH = 75;
+                } else {
+                  costume = fireMarioRunR3;
+                  costumeW = 35;
+                  costumeH = 77.5;
+                }
+              } else {
+                if(Math.round(millis()/160)%3 == 0) {
+                  costume = fireMarioRunR1;
+                  costumeW = 40;
+                  costumeH = 80;
+                } else if(Math.round(millis()/160)%3 == 1) {
+                  costume = fireMarioRunR2;
+                  costumeW = 40;
+                  costumeH = 75;
+                } else {
+                  costume = fireMarioRunR3;
+                  costumeW = 35;
+                  costumeH = 77.5;
+                }
+              }
+            } else if(keys[1] && vx < 0) {
+              if(keys[4]) {
+                if(Math.round(millis()/80)%3 == 0) {
+                  costume = fireMarioRunL1;
+                  costumeW = 40;
+                  costumeH = 80;
+                } else if(Math.round(millis()/80)%3 == 1) {
+                  costume = fireMarioRunL2;
+                  costumeW = 40;
+                  costumeH = 75;
+                } else {
+                  costume = fireMarioRunL3;
+                  costumeW = 35;
+                  costumeH = 77.5;
+                }
+              } else {
+                if(Math.round(millis()/160)%3 == 0) {
+                  costume = fireMarioRunL1;
+                  costumeW = 40;
+                  costumeH = 80;
+                } else if(Math.round(millis()/160)%3 == 1) {
+                  costume = fireMarioRunL2;
+                  costumeW = 40;
+                  costumeH = 75;
+                } else {
+                  costume = fireMarioRunL3;
+                  costumeW = 35;
+                  costumeH = 77.5;
+                }
+              }
+            } else {
+              if(right) {
+                costume = fireMarioSlideR;
+                costumeW = 40;
+                costumeH = 80;
+              } else {
+                costume = fireMarioSlideL;
+                costumeW = 40;
+                costumeH = 80;
+              }
+            }
+          } else {
+            if(right && jumping) {
+              costume = fireMarioJumpR;
+              costumeW = 40;
+              costumeH = 80;
+            } else if (!right && jumping) {
+              costume = fireMarioJumpL;
+              costumeW = 40;
+              costumeH = 80;
+            }
+          }
+        } else {
+          if(right) {
+            costume = fireMarioThrowR;
+            costumeW = 40;
+            costumeH = 75;
+          } else {
+            costume = fireMarioThrowL;
+            costumeW = 40;
+            costumeH = 75;
+          }
+        }
+      } else {
+        if(right) {
+          costume = fireMarioCrouchR;
+          costumeW = 40;
+          costumeH = 55;
+        } else {
+          costume = fireMarioCrouchL;
+          costumeW = 40;
+          costumeH = 55;
         }
       }
     }
@@ -317,6 +341,7 @@ class Mario extends Object {
   
   public void collision() {
     canJump = false;
+    bonk = false;
     for(int i = 0; i < tiles.size(); i++) {
       vx = tiles.get(i).getVX();
       if(tiles.get(i).r() && tiles.get(i).l() && tiles.get(i).b() && tiles.get(i).t()) {
@@ -329,6 +354,7 @@ class Mario extends Object {
           vy = 0;
           myY = tiles.get(i).getB()+myHeight/2;
           if(tiles.get(i).breakable || tiles.get(i).itemHeld) {tiles.get(i).bump(i);}
+          bonk = true;
         } else if(vx > 0) {
           //keys[0] = false;
           //vx = 0;
@@ -384,6 +410,15 @@ class Mario extends Object {
       }
     }
     if(myY > height+300) {marioDead = true;}
+    if(keys[0] && !keys[1]) {right = true;}
+    else if(keys[1] && !keys[0]) {right = false;}
+    if(keys[3]) {
+      crouching = true;
+    } else {
+      if(!bonk) {
+        crouching = false;
+      }
+    }
   }
   
   public void enemyStomp() {
@@ -449,11 +484,15 @@ public void keyPressed() {
     } if(keyCode == UP) {
       keys[2] = true;
       jumping = true;
-    } if(keyCode == DOWN) {
+    } if(keyCode == DOWN && marioState > 0) {
+      if(!crouching) {
+        mario.setH(40);
+        mario.setY(mario.getY()+20);
+      }
       keys[3] = true;
     } if(key == 'x') {
       keys[4] = true;
-      if(marioState == 2 && !fireballing && millis()-fireballTimer > 200) {
+      if(marioState == 2 && !crouching && !fireballing && millis()-fireballTimer > 200) {
         if(right) {
           fireballs.add(new Fireball(mario.getX(), mario.getY(), 20, 20, 10, fireballs.size()));
         } else {
@@ -463,7 +502,9 @@ public void keyPressed() {
         fireballTimer = millis();
       }
     } if(key == 'r') {
-      mario.setY(500);
+      mario.setVY(-15);
+      marioState = -1;
+      marioDead = true;
     }
   }
 }
@@ -477,6 +518,10 @@ public void keyReleased() {
     keys[2] = false;
   } if(keyCode == DOWN) {
     keys[3] = false;
+    if(marioState > 0) {
+      mario.setH(80);
+      mario.setY(mario.getY()-20);
+    }
   } if(key == 'x') {
     keys[4] = false;
     fireballing = false;
