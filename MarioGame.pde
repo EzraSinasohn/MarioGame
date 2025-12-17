@@ -173,8 +173,6 @@ void draw() {
     }
     mario.move();
     mario.show();
-    text((int) (mario.relX), 50, 50);
-    text(mario.getY(), 250, 50);
   }
   if(millis()-resetTimer < 500) {
     fill(0);
