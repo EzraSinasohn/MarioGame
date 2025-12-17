@@ -6,7 +6,7 @@ public class Object {
   }
   
   public void move() {
-    if((keys[0] || keys[1])) {
+    if((keys[0] || keys[1]) && !(crouching && canJump)) {
       if(keys[4]) {
         if(keys[0]) {accelerate(0.4, 8);}
         if(keys[1]) {accelerate(-0.4, -8);}
