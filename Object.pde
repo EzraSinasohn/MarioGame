@@ -35,6 +35,8 @@ public class Object {
   public float getH() {return myHeight;}
   public void setX(float x) {myX = x;}
   public void setY(float y) {myY = y;}
+  public void setW(float w) {myWidth = w;}
+  public void setH(float h) {myHeight = h;}
   public float getR() {return myX+myWidth/2;}
   public float getL() {return myX-myWidth/2;}
   public float getB() {return myY+myHeight/2;}
